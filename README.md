@@ -1,5 +1,5 @@
-# Cybersecurity learning portofolio
-This repo documents my practical learning journey in cybersecurity, including course notes, security analyses, laboratory exercises and personal observations.
+# Learning portofolio
+This repo documents my practical learning journey in help desk and cybersecurity, including course notes, security analyses, laboratory exercises and personal observations.
 
 ## Learning paths
 

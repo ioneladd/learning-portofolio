@@ -59,4 +59,46 @@ IP Addresses = uniquely identifies your device and the associated network and al
              = most devices connected to a network have an IP address 
              - every IP address is broken down in two components: network component and host component, the network ID showing what network the system is on and then the host ID says the specific device
 
-39.17
+LAN = geographic area that shares the same network ID (for example: IP address - 192.168.1.1, "192.168.1" - network ID, ".1" - host ID - device). Devices are able to communicate using a hub or a switch. To communicate with a device in another network, a router is needed. 
+
+Computers and other devices are connected using copper-based twisted-pair cables or wireless equipment
+
+Firewall - a router with additional functionality; allows you to interconnect two networks but with a large amount, depending on the firewall, of security that typical routers do not have
+
+Virtual LAN - group of hosts with common set of requirements that communicate as if they were connected together in a normal fashion on one switch, regardless of their physical location; allows to group devices known by a switch together; for example, in a company, you can separate departments. A router can also be used to separate those networks, but they are expensive
+
+Network topologies = defines the physical connection of hosts in a computer network
+                   = bus - in line (if one goes down, every other following goes down), ring (more of a logical topology than a physical one; physically looks like a star, but logically works like a ring), star (the center is a hub or a switch, or a SOHO router, and each device is directly connected to it through a twisted-pair cable), mesh (everything connected to everything else), tree (not very common)
+
+Star topology - most common topology
+
+Mesh - very expensive
+
+Ring - each computer is connected using a closed loop; used by token ring and fiber distributed data interface (FDDI)
+
+Token Ring - all computers in it are connected to a central connecting device known as a Multistation Access Unit (MAU or MSAU)
+
+Ethernet - Institute of Electrical and Electronics Engineers (IEEE) standard (802.3) that defines how information is sent and received between network adapters, hubs, switches and other devices
+         - the most widely installed LAN
+         - common: 802.3u or Fast Ethernet (100 Mbps); 802.3ab or Gigabit Ethernet
+
+Information is put on the physical media in frames, that's how computers on Ethernet networks communicate. A frame is a sequence of bits containing a detectable beggining and end of a packet in the stream of bits; a data packet residing on Layer 2 of the OSI model
+
+Centralized computing - done at a central location using terminals that are attached to this main system
+
+Client/Server model - architecture that distributes applications between servers and client computers (Server: provides services such as Windows Server 2008 R2, Client: Device that requests services such as Windows 7)
+
+Example for peer to peer systems: filesharing
+
+Distributed computing - includes both client-server and peer-to-peer networks
+                      - every device or workstation has its own processing power
+
+Remote Desktop Services and Remote Sessions 
+- centralized computing has made a comeback of sorts. Remote Desktop Services and remote sessions to computers are based off of the centralized computing model
+- thin-client computers do not have a hard drive and store operating system in RAM to be loaded every time the device is turned on
+- all other applications and data are stored centrally, this system is a blend of centralized and distributive computing
+
+Servers
+- more powerful computers that provide centralized cervices: file, print, database, network controller, messaging/email, web
+
+P2P or peer to peer hac recetnly got an additional meaning, which is to refer to file sharing networks. e.g.: Napster, Gnutella, G2. Other services that also take advantage of P2P file sharing: Skype, VoIP, Cloud computing

@@ -1,104 +1,215 @@
-# Microsoft Learn - Networking Fundamentals - 01 - Understanding Local Area Networking
+# Networking Fundamentals — 01: Understanding Local Area Networking
 
-## Terminology
-Data = unit of information that's gonna flow across the network
+> Notes from Microsoft Learn — Networking Fundamentals  
+> Part of my cybersecurity learning roadmap.
 
-Node = end devices that are on the network
+---
 
-Client = requests services
+## Table of Contents
 
-Server = fulfills services
+1. [Core Concepts](#1-core-concepts)
+2. [Network Devices](#2-network-devices)
+3. [Addressing](#3-addressing)
+4. [Network Media & Data Transfer](#4-network-media--data-transfer)
+5. [Network Topologies](#5-network-topologies)
+6. [Network Standards — Ethernet](#6-network-standards--ethernet)
+7. [Network Models](#7-network-models)
+8. [Network Segmentation](#8-network-segmentation)
+9. [Network Documentation](#9-network-documentation)
 
-Peer = can perform both actions, it can be a client or a server; lots of devices act as peers
+---
 
-Network adapter = to gain access to the network/other devices, you need a network adapter of some kind to allow you to access the media
-                = also known as a network interface card (NIC), is the hardware device that enables you to send and receive from your computer
-                - RJ-45 jack oriented piece of hardware - the most common type of network adapter connection (wired network)
-                
-Hub = device that multiple devices hook into that basically spreads the data around to the other devices so that everybody has access to it
-    = the most basic central connecting device; enables computers on a network to communicate
-    = a host sends data to the hub, the hub sends the data to all devices connected to the hub
-    = broadcasts the information received to all the devices connected without picking; if any of those devices don't need that information, they just ignore it, they still listen to it, but pay it no attention
-    
-Switch = similar to a hub, different a bit in its functionality
-       = smarter version of a hub, more selective about how it sends information; keeps track of which addresses from which devices are connected to it. When computer A is gonna send some information, it will open it a bit, look at the header at the top of the file, and say, "this is destined to a computer that has this MAC address", so I'm gonna send it to that port
+## 1. Core Concepts
 
-Router = network utilities or network devices used to connect multiple devices together
-       = enables computer to communicate to a different network
-       
-Media = this is what devices talk on (cable, wireless, other different types of media)
+| Term | Definition |
+|------|-----------|
+| **Data** | A unit of information that flows across a network. |
+| **Node** | Any end device on a network. |
+| **Client** | A device that requests services. |
+| **Server** | A device that fulfills service requests. |
+| **Peer** | A device that can act as both client and server. Most devices behave as peers. |
+| **Bandwidth** | The maximum amount of data that can be transferred across a network at a given time. |
+| **Transport Protocol** | A set of rules and standards that govern how data is transported, enabling different devices to interconnect and communicate. |
 
-Transport Protocol = rules/standards for data transport, using them makes different devices be able to connect together and intercommunicate
+### Local Area Network (LAN)
 
-Bandwidth = what you can actually use to transfer data across a network, what's available to you
+A **LAN** is a group of computers and devices confined to a small geographic area (such as a single building) that share a common communication medium — wired, wireless, or both.
 
-Local Area Network (LAN) = a group of computers confined to a small geographic area, such as a single building; basic building block of what a network is
-                         = a group of devices that share a common communication medium, such as cabled or wireless connection (might be having both wireless and cabled and still be called LAN)
+All devices in a LAN share the same **network ID** (see [Addressing](#3-addressing)). To communicate with a device on a *different* network, a router is required.
 
-Networks = used to exchange data - for sharing information, communicating, organizing data
+Networks are used to **exchange data**, share information, communicate, and organize resources.
 
-Network documentation - helps describe, define and explain physical and logical method for connecting devices, it occurs before a network is built, or when changes are made to the network; Microsoft Visio is a tool that can be used to document networks
+---
 
-MAC(Media Access Control) addresses = address assigned to the physical network port on a network card in a computer, on any computer; any computer that has a network card, has an MAC address assigned to it.
+## 2. Network Devices
 
-For the **hub**, the bandwidth mentioned in the specifications is shared. So that hub can support 100 megabits per second across all of its ports, so if I'm sending a large file to a server or another computer in my house, and someone else decides to send a large file to another computer, my bandwidth gets cut in half. **Switches**, because they have addressable ports and can keep track of where data is supposed to go, that is not the case. So for switches, that traffic is available for every port at any time - all the specified bandwidth/port.
+### Network Adapter (NIC)
+A **Network Interface Card** is the hardware component that allows a device to send and receive data on a network. Wired NICs typically feature an **RJ-45 jack**. Every NIC is assigned a unique MAC address.
 
-Wireless Access Point (WAP) = basic device for wireless; it's what is used on a network to allow wireless devices to connect to the wired network. Basically, the backbone of any network is wired, but you'll have areas that allow wireless to connect to your wired network
+---
 
-Serial Data Transfer = the transfer of one bit at a time => on the network cable, data travels in a single bit stream
+### Hub
+A hub is the most basic central connecting device. When a device sends data to a hub, the hub **broadcasts** that data to *all* connected devices. Devices that the data wasn't intended for simply ignore it.
 
-Data Transfer Rate (bits) = defines the maximum bits per second (bps) that can be transmitted over a networks (example: 10 Mbps - with lower case 'b', differentiating this unit from the data stored on a hard drive, noted with MB)
+**Bandwidth caveat:** A hub's bandwidth is *shared* across all ports. For example, a 100 Mbps hub splits that bandwidth among all active transfers happening simultaneously.
 
-1 byte = 8 bits
+---
 
-Types of transfer = broadcast (example: radio) and unicast (walkie-talkie)
+### Switch
+A switch is a smarter version of a hub. It keeps track of the **MAC addresses** of devices connected to each of its ports. When data arrives, the switch reads the destination MAC address in the frame header and forwards it *only* to the correct port — not to everyone.
 
-IP Addresses = uniquely identifies your device and the associated network and allows each device to send and receive information
-             = how to devices know a specific device that the information is sent to? They use an IP address, which is similar to social security numbers to identify people. 
-             = associated by the TCP/IP Protocol associated to the MAC address
-             = most devices connected to a network have an IP address 
-             - every IP address is broken down in two components: network component and host component, the network ID showing what network the system is on and then the host ID says the specific device
+**Bandwidth advantage:** Because traffic is directed, the full specified bandwidth is available on *every port* simultaneously, unlike a hub.
 
-LAN = geographic area that shares the same network ID (for example: IP address - 192.168.1.1, "192.168.1" - network ID, ".1" - host ID - device). Devices are able to communicate using a hub or a switch. To communicate with a device in another network, a router is needed. 
+---
 
-Computers and other devices are connected using copper-based twisted-pair cables or wireless equipment
+### Router
+A router connects **multiple networks** together, enabling devices on different networks to communicate with each other. To send data outside your LAN, it must pass through a router.
 
-Firewall - a router with additional functionality; allows you to interconnect two networks but with a large amount, depending on the firewall, of security that typical routers do not have
+---
 
-Virtual LAN - group of hosts with common set of requirements that communicate as if they were connected together in a normal fashion on one switch, regardless of their physical location; allows to group devices known by a switch together; for example, in a company, you can separate departments. A router can also be used to separate those networks, but they are expensive
+### Firewall
+A firewall is essentially a **router with enhanced security functionality**. It interconnects two networks while applying security rules that standard routers do not offer. The depth of security depends on the specific firewall.
 
-Network topologies = defines the physical connection of hosts in a computer network
-                   = bus - in line (if one goes down, every other following goes down), ring (more of a logical topology than a physical one; physically looks like a star, but logically works like a ring), star (the center is a hub or a switch, or a SOHO router, and each device is directly connected to it through a twisted-pair cable), mesh (everything connected to everything else), tree (not very common)
+---
 
-Star topology - most common topology
+### Wireless Access Point (WAP)
+A WAP allows wireless devices to connect to a **wired network**. The backbone of most networks is wired, and WAPs serve as the bridge between wireless clients and that wired infrastructure.
 
-Mesh - very expensive
+---
 
-Ring - each computer is connected using a closed loop; used by token ring and fiber distributed data interface (FDDI)
+## 3. Addressing
 
-Token Ring - all computers in it are connected to a central connecting device known as a Multistation Access Unit (MAU or MSAU)
+### MAC Address (Media Access Control)
+A **MAC address** is a unique identifier assigned to the physical network port of a NIC. Every device with a network card has one. MAC addresses operate at **Layer 2** of the OSI model and are used by switches to direct traffic within a LAN.
 
-Ethernet - Institute of Electrical and Electronics Engineers (IEEE) standard (802.3) that defines how information is sent and received between network adapters, hubs, switches and other devices
-         - the most widely installed LAN
-         - common: 802.3u or Fast Ethernet (100 Mbps); 802.3ab or Gigabit Ethernet
+### IP Address
+An **IP address** uniquely identifies a device and its associated network, enabling devices to send and receive data across networks. IP addresses are associated with MAC addresses via the **TCP/IP protocol**.
 
-Information is put on the physical media in frames, that's how computers on Ethernet networks communicate. A frame is a sequence of bits containing a detectable beggining and end of a packet in the stream of bits; a data packet residing on Layer 2 of the OSI model
+Every IP address has two components:
 
-Centralized computing - done at a central location using terminals that are attached to this main system
+| Component | Purpose | Example (`192.168.1.5`) |
+|-----------|---------|------------------------|
+| **Network ID** | Identifies the network | `192.168.1` |
+| **Host ID** | Identifies the specific device | `.5` |
 
-Client/Server model - architecture that distributes applications between servers and client computers (Server: provides services such as Windows Server 2008 R2, Client: Device that requests services such as Windows 7)
+Devices sharing the same network ID are on the same LAN and can communicate directly via a hub or switch. Communication across different network IDs requires a **router**.
 
-Example for peer to peer systems: filesharing
+---
 
-Distributed computing - includes both client-server and peer-to-peer networks
-                      - every device or workstation has its own processing power
+## 4. Network Media & Data Transfer
 
-Remote Desktop Services and Remote Sessions 
-- centralized computing has made a comeback of sorts. Remote Desktop Services and remote sessions to computers are based off of the centralized computing model
-- thin-client computers do not have a hard drive and store operating system in RAM to be loaded every time the device is turned on
-- all other applications and data are stored centrally, this system is a blend of centralized and distributive computing
+### Media
+**Media** is the physical or wireless medium over which data travels. Common types include:
 
-Servers
-- more powerful computers that provide centralized cervices: file, print, database, network controller, messaging/email, web
+- **Copper twisted-pair cables** (most common for wired LANs)
+- **Wireless (radio frequency)**
+- **Fiber optic**
 
-P2P or peer to peer hac recetnly got an additional meaning, which is to refer to file sharing networks. e.g.: Napster, Gnutella, G2. Other services that also take advantage of P2P file sharing: Skype, VoIP, Cloud computing
+### Serial Data Transfer
+On network cables, data travels **one bit at a time** in a single bit stream — this is called **serial data transfer**.
+
+### Data Transfer Rate
+The **Data Transfer Rate** defines the maximum number of bits per second (bps) that can be transmitted over a network.
+
+> **Important distinction:**  
+> - Network speeds use a **lowercase b** → **Mbps** (megabits per second)  
+> - Storage sizes use an **uppercase B** → **MB** (megabytes)  
+> - 1 byte = 8 bits
+
+### Types of Transmission
+
+| Type | Description | Analogy |
+|------|-------------|---------|
+| **Broadcast** | Data sent to all devices | Radio |
+| **Unicast** | Data sent to one specific device | Walkie-talkie |
+
+---
+
+## 5. Network Topologies
+
+A **network topology** defines how devices (hosts) are physically or logically connected in a network.
+
+| Topology | Description | Notes |
+|----------|-------------|-------|
+| **Bus** | Devices connected in a line | If one segment fails, everything after it goes down |
+| **Ring** | Closed loop; each device connects to two others | More logical than physical; used by Token Ring and **FDDI** (Fiber Distributed Data Interface) |
+| **Star** | All devices connect to a central hub or switch | **Most common topology** |
+| **Mesh** | Every device connects to every other device | Very expensive; highly redundant |
+| **Tree** | Hierarchical combination of star topologies | Not very common |
+
+### Star Topology (Most Common)
+The center of a star network is typically a **hub, switch, or SOHO router**. Each device connects directly to it via twisted-pair cable. This is the topology you'll encounter most in real environments.
+
+### Token Ring
+Devices are connected to a central device called a **Multistation Access Unit (MAU/MSAU)**. Physically resembles a star, but data travels logically in a ring.
+
+---
+
+## 6. Network Standards — Ethernet
+
+**Ethernet** is the IEEE **802.3** standard that defines how data is sent and received between network adapters, hubs, switches, and other devices. It is the most widely installed LAN technology.
+
+### Common Ethernet Standards
+
+| Standard | Name | Speed |
+|----------|------|-------|
+| **802.3u** | Fast Ethernet | 100 Mbps |
+| **802.3ab** | Gigabit Ethernet | 1,000 Mbps (1 Gbps) |
+
+### Frames
+On Ethernet networks, data is transmitted in **frames** — sequences of bits with a detectable beginning and end. A frame is a **Layer 2** (Data Link) construct in the OSI model that wraps a data packet for transmission on the physical network.
+
+---
+
+## 7. Network Models
+
+### Centralized Computing
+All processing happens at a central location. Users interact via **terminals** connected to the main system. This model has seen a modern revival through:
+
+- **Remote Desktop Services** — users connect remotely to a central machine
+- **Thin clients** — devices with no local hard drive; they load their OS from RAM and rely on a central server for all applications and data. This makes thin clients a *hybrid* of centralized and distributed computing — the processing is centralized, but the device itself is still a distinct endpoint
+
+### Client/Server Model
+The dominant model for most enterprise networks. Responsibilities are clearly separated:
+
+- **Server** — provides centralized services. Common server roles include: file, print, database, network controller, messaging/email, and web. Example: Windows Server
+- **Client** — requests and consumes those services. Example: Windows workstation
+
+### Peer-to-Peer (P2P)
+Every device has its own processing power and can act as both client and server. P2P is common in:
+
+- Small home or office networks
+- File-sharing networks (e.g., Napster, Gnutella, G2)
+- Applications like Skype, VoIP, and cloud services
+
+### Distributed Computing
+Encompasses both client/server and P2P models. Every workstation has its own processing power, but resources and services can still be shared across the network.
+
+---
+
+## 8. Network Segmentation
+
+### Virtual LAN (VLAN)
+A **VLAN** is a logical grouping of devices on a switch that communicate as if they were on the same physical network, **regardless of their physical location**.
+
+- Managed at the switch level
+- Commonly used to separate departments within a company (e.g., HR, Finance, IT) without needing separate physical switches
+- Provides improved security and reduced broadcast traffic
+- Routers can also segment networks, but they are more expensive; VLANs are a cost-effective alternative
+
+---
+
+## 9. Network Documentation
+
+Network documentation describes the **physical and logical** methods used to connect devices. It is created:
+
+- Before a network is built
+- When changes are made to an existing network
+
+A well-documented network makes troubleshooting, auditing, and expansion significantly easier.
+
+**Tool:** Microsoft Visio is commonly used for network diagrams and documentation.
+
+---
+
+*These notes are part of my cybersecurity learning journey. See the full roadmap in the repository README.*

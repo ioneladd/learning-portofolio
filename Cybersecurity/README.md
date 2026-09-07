@@ -14,7 +14,7 @@ This folder documents my cybersecurity learning journey, including completed cou
 Completed the Cisco Networking Academy *Introduction to Cybersecurity* course.
 
 * Covered fundamental cybersecurity concepts, online threats, malware, social engineering, and security practices.
-* Certificate: [`Cisco Certificate`](./Cisco-Introduction-to-Cybersecurity/)
+* Certificate: [`Cisco Certificate`](./Cisco-Introduction-to-Cybersecurity/Introduction_to_Cybersecurity_certificate_DIV.pdf)
 
 ### Fortinet – NSE 1
 
